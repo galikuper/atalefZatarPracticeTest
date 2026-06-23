@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <title>תרגול זט”ר עטלף - פרטים אישיים</title>
+</head>
+
+<body dir="rtl">
+    <img src="./assets/peleIcon.svg" alt="פלא - פיתוח למידה אינטראקטיבית" id="pele-icon" />
+    <div id="left-logos">
+        <img src="./assets/gapaIcon.svg" alt='גפ"ה - חטיבת ביסל"ח' id="gapa-icon" />
+        <img src="./assets/bislachIcon.svg" alt='ביסלמ"ח' id="bislach-icon" />
+    </div>
+
+    <div id="page-content">
+        <h1>פרטי חניך</h1>
+
+        <form id="user-info">
+
+            <label>שם חניך</label>
+            <input type="text" id="soldier-name">
+            <p class="error-message" id="name-error"></p>
+
+            <label>מספר אישי</label>
+            <input type="text" id="soldier-personal-number" maxlength="7" inputmode="numeric">
+            <p class="error-message" id="id-error"></p>
+
+            <button type="submit" id="continue-btn">
+                <img src="./assets/continueBtn.svg" alt="המשך">
+            </button>
+
+        </form>
+    </div>
+
+    <script src="code.js"></script>
+</body>
+
+</html>
