@@ -1,36 +1,36 @@
 let questions = [
-    // {
-    //     number: 0,
-    //     top: ["src", "assets/q0.png"],
-    //     head: "מהו עקרון הזט״ר הבולט ביותר בתמונה?",
-    //     type: "open",
-    //     option: [],
-    //     answer: "הבדלים בין תצ״א למציאות"
-    // },
-    // {
-    //     number: 1,
-    //     top: ["src", "assets/q1.png"],
-    //     head: "מדוע נוצר ההבדל בין 2 התוצאות? סמן 2 תשובות נכונות",
-    //     type: "multiple-choice",
-    //     option: ["חבלה חמה/קרה", "⁠בניית מנהרות תת קרקעיות חדשות", "⁠הפעלת אש כבדה של כוחות שונים טרם כניסה קרקעית של כוחותינו", "התרסקות מטוס בסביבה", "הצפת מנהרות במי ים"],
-    //     answer: ["חבלה חמה/קרה", "⁠הפעלת אש כבדה של כוחות שונים טרם כניסה קרקעית של כוחותינו"]
-    // },
-    // {
-    //     number: 2,
-    //     top: ["src", "assets/q2.png"],
-    //     head: "איזה עקרון זט״ר בולט בתמונה ותוכל להיעזר בו כדי לאפיין מבנה מיוחד בתמונה?",
-    //     type: "open",
-    //     option: [],
-    //     answer: "כיוון מבנים"
-    // },
-    // {
-    //     number: 3,
-    //     top: ["src", "assets/q3.png"],
-    //     head: "מהו עקרון הזט״ר הבולט ביותר בתמונה?",
-    //     type: "american",
-    //     option: ["מיקום עצמי", "צורת גג", "⁠כיוון מבנים", "שימוש בצירים"],
-    //     answer: "שימוש בצירים"
-    // },
+    {
+        number: 0,
+        top: ["src", "assets/q0.png"],
+        head: "מהו עקרון הזט״ר הבולט ביותר בתמונה?",
+        type: "open",
+        option: [],
+        answer: "הבדלים בין תצ״א למציאות"
+    },
+    {
+        number: 1,
+        top: ["src", "assets/q1.png"],
+        head: "מדוע נוצר ההבדל בין 2 התוצאות? סמן 2 תשובות נכונות",
+        type: "multiple-choice",
+        option: ["חבלה חמה/קרה", "⁠בניית מנהרות תת קרקעיות חדשות", "⁠הפעלת אש כבדה של כוחות שונים טרם כניסה קרקעית של כוחותינו", "התרסקות מטוס בסביבה", "הצפת מנהרות במי ים"],
+        answer: ["חבלה חמה/קרה", "⁠הפעלת אש כבדה של כוחות שונים טרם כניסה קרקעית של כוחותינו"]
+    },
+    {
+        number: 2,
+        top: ["src", "assets/q2.png"],
+        head: "איזה עקרון זט״ר בולט בתמונה ותוכל להיעזר בו כדי לאפיין מבנה מיוחד בתמונה?",
+        type: "open",
+        option: [],
+        answer: "כיוון מבנים"
+    },
+    {
+        number: 3,
+        top: ["src", "assets/q3.png"],
+        head: "מהו עקרון הזט״ר הבולט ביותר בתמונה?",
+        type: "american",
+        option: ["מיקום עצמי", "צורת גג", "⁠כיוון מבנים", "שימוש בצירים"],
+        answer: "שימוש בצירים"
+    },
     {
         number: 4,
         top: ["src", "assets/q4.png"],
@@ -76,10 +76,7 @@ let questions = [
     },
 ];
 
-let startBtn;
-let restartBtn;
-let formBtn;
-let quizData;
+let startBtn, restartBtn, formBtn, quizData;
 quizData = {
     user: {
         name: "",
@@ -101,7 +98,8 @@ window.addEventListener("load", () => {
     // INDEX
     if (document.getElementById("open-title")) {
         startBtn = document.getElementById("start-practice");
-        startBtn.addEventListener("click", () => { window.location.href = "userInfo.html" });
+        // startBtn.addEventListener("click", () => { window.location.href = "userInfo.html" });
+        startBtn.addEventListener("click", () => { startTransition(null, "userInfo.html"); });
     }
     // USER INFO
     else if (document.getElementById("user-info")) {
@@ -129,7 +127,8 @@ window.addEventListener("load", () => {
         });
 
         closeBtn = document.getElementById("close-instructions");
-        closeBtn.addEventListener("click", () => { window.location.href = "practice.html" });
+        // closeBtn.addEventListener("click", () => { window.location.href = "practice.html" });
+        closeBtn.addEventListener("click", () => { startTransition(null, "practice.html"); });
     }
     // PRACTICE
     else if (document.getElementById("question")) {
@@ -155,8 +154,7 @@ window.addEventListener("load", () => {
             document.getElementById("finish-number").textContent = "";
         }
     }
-
-    setupImageViewer();                       //remove for pinch to zoom
+    setupImageViewer();
 });
 function saveUserInfo(event) {
     event.preventDefault();
@@ -210,12 +208,6 @@ function showQuestion(q) {
     container = document.getElementById("top");
     top.innerHTML = "";
     if (questions[q].top[0] === "src") {
-
-
-
-
-
-
         top.innerHTML = `
             <img src="${questions[q].top[1]}" class="question-image">
             <img src="assets/enlarge.svg" id="zoom-btn">
@@ -229,15 +221,6 @@ function showQuestion(q) {
             e.stopPropagation(); // prevents double-trigger with image click
             openImage(img.src);
         };
-
-
-
-
-
-
-
-
-
     }
     else if (questions[q].top[0] === "table") {
         showDragTable(q);
@@ -499,16 +482,6 @@ function handleCheck() {
             // to consider open answer false
             questionScore = 0;
 
-
-
-
-
-
-
-
-
-
-
             break;
 
         case "multiple-choice":
@@ -690,8 +663,9 @@ function handleContinue() {
     localStorage.setItem("quizData", JSON.stringify(quizData));
 
     if (countQuest < questions.length) {
-        showQuestion(countQuest);
-        // resetButton();
+        startTransition(() => {
+            showQuestion(countQuest);
+        });
     }
     else {
         window.location.href = "finish.html";
@@ -891,8 +865,6 @@ function updateAnsweredState() {
         setAnswered(placed >= 1);
     }
 }
-
-
 function setupImageViewer() {
     const modal = document.getElementById("image-modal");
     const modalImg = document.getElementById("modal-image");
@@ -915,4 +887,64 @@ function setupImageViewer() {
     modal.addEventListener("click", (e) => {
         if (e.target === modal) closeModal();
     });
+}
+
+
+
+
+
+
+function startTransition(callback, nextPage) {
+    const overlay = document.getElementById("transition-overlay");
+    overlay.innerHTML = "";
+
+    const isQuestion = !!document.getElementById("question");
+
+    for (let i = 0; i < 15; i++) {
+        const bat = document.createElement("img");
+
+        bat.src = "./assets/bat.svg";
+        bat.classList.add("transition-bat");
+
+        let size, duration, delay, yOffset;
+
+        if (isQuestion) {
+            size = 60 + Math.random() * 140;
+            duration = 400 + Math.random() * 300;
+            delay = Math.random() * 100;
+            yOffset = Math.random() * 80 - 40;
+        } else {
+            size = 60 + Math.random() * 140;
+            duration = 350 + Math.random() * 450;
+            delay = Math.random() * 200;
+            yOffset = Math.random() * 80 - 40;
+        }
+
+        bat.style.width = `${size}px`;
+        bat.style.animationDuration = `${duration}ms`;
+        bat.style.animationDelay = `${delay}ms`;
+        bat.style.setProperty("--yOffset", `${yOffset}vh`);
+
+        // optional positioning difference
+        bat.style.top = isQuestion
+            ? `${Math.random() * 90}%`
+            : `${Math.random() * 100}%`;
+
+        overlay.appendChild(bat);
+    }
+
+    if (isQuestion) {
+        setTimeout(() => {
+            callback();
+        }, 250);
+
+        setTimeout(() => {
+            overlay.innerHTML = "";
+        }, 900);
+    }
+    else {
+        setTimeout(() => {
+            window.location.href = nextPage;
+        }, 350);
+    }
 }

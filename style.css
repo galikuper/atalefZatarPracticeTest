@@ -180,25 +180,6 @@ body {
 }
 
 #instructions {
-    /* margin-top: 12vh; */
-    /* height: 60vh;
-    width: 80vw;
-    color: #192043;
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    
-    text-align: center;
-    
-    
-    background-color: #192043;
-    border: none;
-    border-radius: 12px; */
-}
-
-#instructions {
     /* width: min(400px, 85vw); */
 
     width: 300px;
@@ -254,7 +235,8 @@ body {
     width: 100%;
     height: 80px;
 
-    background: #DCEAFF;
+    /* background: #DCEAFF; */
+    background: rgb(39, 47, 92);
     border-radius: 24px 24px 0 0;
     border-radius: 24px 24px 12px 12px;
 
@@ -331,9 +313,52 @@ body {
 
 
 
+/* transition */
+#transition-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+}
 
+.transition-bat {
+    position: absolute;
+    right: -150px;
 
+    animation-name: flyBat;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
 
+@keyframes flyBat {
+    from {
+        transform:
+            translateX(0) translateY(0)
+            /* rotate(-10deg); */
+    }
+
+    to {
+        transform:
+            translateX(-160vw) translateY(-60vh)
+            /* rotate(25deg); */
+            /* opacity: 0.5; */
+    }
+}
+
+@keyframes flyBat {
+    from {
+        transform: translate(0, 0)
+            /* rotate(-10deg); */
+    }
+
+    to {
+        transform:
+            translateX(-160vw) translateY(calc(-30vh + var(--yOffset)))
+            /* rotate(25deg); */
+            /* opacity: 0; */
+    }
+}
 
 
 
@@ -409,9 +434,6 @@ body {
 #top:active {
     transform: scale(0.98);
 }
-
-/* .enlargeThisImg {
-} */
 
 .question-image-placeholder {
     width: 100%;
@@ -711,24 +733,7 @@ input[type="checkbox"]:checked::before {
     justify-content: center;
     align-items: center;
     overflow: visible;
-
-    /* background-color: red;
-    opacity: 0.5; */
 }
-
-/* @media (max-width: 435px) {
-    * {
-        background-color: white;
-    }
-    .north {
-        top: 5%;
-    }
-
-    .south {
-        bottom: 5%;
-    }
-
-} */
 
 .north {
     top: -10%;
@@ -775,7 +780,7 @@ input[type="checkbox"]:checked::before {
     color: #EEF5FF;
     border-radius: 32px;
     text-align: center;
-    
+
     padding: 18px 33px;
     /* width: 70px; */
     /* height: 50px; */
