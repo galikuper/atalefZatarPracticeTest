@@ -1,44 +1,44 @@
 let questions = [
-    {
-        number: 0,
-        top: ["src", "assets/q0.svg"],
-        head: "מהו עקרון הזט״ר הבולט ביותר בתמונה?",
-        type: "open",
-        option: [],
-        answer: "הבדלים בין תצ״א למציאות"
-    },
-    {
-        number: 1,
-        top: ["src", "assets/q1.svg"],
-        head: "מדוע נוצר ההבדל בין 2 התוצאות? סמן 2 תשובות נכונות",
-        type: "multiple-choice",
-        option: ["חבלה חמה/קרה", "⁠בניית מנהרות תת קרקעיות חדשות", "⁠הפעלת אש כבדה של כוחות שונים טרם כניסה קרקעית של כוחותינו", "התרסקות מטוס בסביבה", "הצפת מנהרות במי ים"],
-        answer: ["חבלה חמה/קרה", "⁠הפעלת אש כבדה של כוחות שונים טרם כניסה קרקעית של כוחותינו"]
-    },
-    {
-        number: 2,
-        top: ["src", "assets/q2.svg"],
-        head: "איזה עקרון זט״ר בולט בתמונה ותוכל להיעזר בו כדי לאפיין מבנה מיוחד בתמונה?",
-        type: "open",
-        option: [],
-        answer: "כיוון מבנים"
-    },
-    {
-        number: 3,
-        top: ["src", "assets/q3.svg"],
-        head: "מהו עקרון הזט״ר הבולט ביותר בתמונה?",
-        type: "american",
-        option: ["מיקום עצמי", "צורת גג", "⁠כיוון מבנים", "שימוש בצירים"],
-        answer: "שימוש בצירים"
-    },
-    {
-        number: 4,
-        top: ["src", "assets/q4.svg"],
-        head: "בחר 3 עקרונות זט״ר המופיעים בתמונה:",
-        type: "multiple-choice",
-        option: ["כיווני שמיים", "פרספקטיבה", "כיוון מבנים", "רחובות וצירים", "צורת גג", "מיקום עצמי", "הבדלים בין תצ״א למציאות"],
-        answer: ["כיווני שמיים", "פרספקטיבה", "רחובות וצירים", "צורת גג"]
-    },
+    // {
+    //     number: 0,
+    //     top: ["src", "assets/q0.svg"],
+    //     head: "מהו עקרון הזט״ר הבולט ביותר בתמונה?",
+    //     type: "open",
+    //     option: [],
+    //     answer: "הבדלים בין תצ״א למציאות"
+    // },
+    // {
+    //     number: 1,
+    //     top: ["src", "assets/q1.svg"],
+    //     head: "מדוע נוצר ההבדל בין 2 התוצאות? סמן 2 תשובות נכונות",
+    //     type: "multiple-choice",
+    //     option: ["חבלה חמה/קרה", "⁠בניית מנהרות תת קרקעיות חדשות", "⁠הפעלת אש כבדה של כוחות שונים טרם כניסה קרקעית של כוחותינו", "התרסקות מטוס בסביבה", "הצפת מנהרות במי ים"],
+    //     answer: ["חבלה חמה/קרה", "⁠הפעלת אש כבדה של כוחות שונים טרם כניסה קרקעית של כוחותינו"]
+    // },
+    // {
+    //     number: 2,
+    //     top: ["src", "assets/q2.svg"],
+    //     head: "איזה עקרון זט״ר בולט בתמונה ותוכל להיעזר בו כדי לאפיין מבנה מיוחד בתמונה?",
+    //     type: "open",
+    //     option: [],
+    //     answer: "כיוון מבנים"
+    // },
+    // {
+    //     number: 3,
+    //     top: ["src", "assets/q3.svg"],
+    //     head: "מהו עקרון הזט״ר הבולט ביותר בתמונה?",
+    //     type: "american",
+    //     option: ["מיקום עצמי", "צורת גג", "⁠כיוון מבנים", "שימוש בצירים"],
+    //     answer: "שימוש בצירים"
+    // },
+    // {
+    //     number: 4,
+    //     top: ["src", "assets/q4.svg"],
+    //     head: "בחר 3 עקרונות זט״ר המופיעים בתמונה:",
+    //     type: "multiple-choice",
+    //     option: ["כיווני שמיים", "פרספקטיבה", "כיוון מבנים", "רחובות וצירים", "צורת גג", "מיקום עצמי", "הבדלים בין תצ״א למציאות"],
+    //     answer: ["כיווני שמיים", "פרספקטיבה", "רחובות וצירים", "צורת גג"]
+    // },
     {
         number: 5,
         top: ["table", ""],
@@ -779,27 +779,52 @@ function showScore() {
 
 // helper
 function animateMove(item, destination) {
-    const start = item.getBoundingClientRect();
+    // const start = item.getBoundingClientRect();
+    // destination.appendChild(item);
+    // const end = item.getBoundingClientRect();
+    // const deltaX = start.left - end.left;
+    // const deltaY = start.top - end.top;
+    // item.style.transition = "none";
+    // item.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(1.1)`;
+
+    // requestAnimationFrame(() => {
+    //     item.style.transition = "transform 0.65s cubic-bezier(.34,1.56,.64,1)";
+    //     item.style.transform = "translate(0,0) scale(1)";
+    // });
+
+    // item.addEventListener(
+    //     "transitionend",
+    //     () => {
+    //         item.style.transition = "";
+    //         item.style.transform = "";
+    //     },
+    //     { once: true }
+    // );
+    const first = item.getBoundingClientRect();
+
     destination.appendChild(item);
-    const end = item.getBoundingClientRect();
-    const deltaX = start.left - end.left;
-    const deltaY = start.top - end.top;
-    item.style.transition = "none";
-    item.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(1.1)`;
 
-    requestAnimationFrame(() => {
-        item.style.transition = "transform 0.65s cubic-bezier(.34,1.56,.64,1)";
-        item.style.transform = "translate(0,0) scale(1)";
-    });
+    const last = item.getBoundingClientRect();
 
-    item.addEventListener(
-        "transitionend",
-        () => {
-            item.style.transition = "";
-            item.style.transform = "";
-        },
-        { once: true }
+    const dx = first.left - last.left;
+    const dy = first.top - last.top;
+
+    item.animate(
+        [
+            {
+                transform: `translate(${dx}px, ${dy}px) scale(1.1)`
+            },
+            {
+                transform: "translate(0,0) scale(1)"
+            }
+        ],
+        {
+            duration: 650,
+            easing: "cubic-bezier(.34,1.56,.64,1)",
+            fill: "both"
+        }
     );
+
 }
 function animateCompassMove(item, destination) {
     const first = item.getBoundingClientRect();
