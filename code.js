@@ -1,43 +1,43 @@
 let questions = [
     {
         number: 0,
-        top: ["src", "./assets/q0.svg"],
+        top: ["src", "assets/q0.svg"],
         head: "מהו עקרון הזט״ר הבולט ביותר בתמונה?",
         type: "open",
         option: [],
-        answer: "תשובה לשאלה 0"
+        answer: "הבדלים בין תצ״א למציאות"
     },
     {
         number: 1,
-        top: ["src", "./assets/q1.svg"],
+        top: ["src", "assets/q1.svg"],
         head: "מדוע נוצר ההבדל בין 2 התוצאות? סמן 2 תשובות נכונות",
         type: "multiple-choice",
         option: ["חבלה חמה/קרה", "⁠בניית מנהרות תת קרקעיות חדשות", "⁠הפעלת אש כבדה של כוחות שונים טרם כניסה קרקעית של כוחותינו", "התרסקות מטוס בסביבה", "הצפת מנהרות במי ים"],
-        answer: ["⁠בניית מנהרות תת קרקעיות חדשות", "הצפת מנהרות במי ים"]
+        answer: ["חבלה חמה/קרה", "⁠הפעלת אש כבדה של כוחות שונים טרם כניסה קרקעית של כוחותינו"]
     },
     {
         number: 2,
-        top: ["src", "./assets/q2.svg"],
+        top: ["src", "assets/q2.svg"],
         head: "איזה עקרון זט״ר בולט בתמונה ותוכל להיעזר בו כדי לאפיין מבנה מיוחד בתמונה?",
         type: "open",
         option: [],
-        answer: "תשובה לשאלה 2"
+        answer: "כיוון מבנים"
     },
     {
         number: 3,
-        top: ["src", "./assets/q3.svg"],
+        top: ["src", "assets/q3.svg"],
         head: "מהו עקרון הזט״ר הבולט ביותר בתמונה?",
         type: "american",
         option: ["מיקום עצמי", "צורת גג", "⁠כיוון מבנים", "שימוש בצירים"],
-        answer: "צורת גג"
+        answer: "שימוש בצירים"
     },
     {
         number: 4,
-        top: ["src", "./assets/q4.svg"],
+        top: ["src", "assets/q4.svg"],
         head: "בחר 3 עקרונות זט״ר המופיעים בתמונה:",
         type: "multiple-choice",
         option: ["כיווני שמיים", "פרספקטיבה", "כיוון מבנים", "רחובות וצירים", "צורת גג", "מיקום עצמי", "הבדלים בין תצ״א למציאות"],
-        answer: ["כיווני שמיים", "פרספקטיבה", "כיוון מבנים"]
+        answer: ["כיווני שמיים", "פרספקטיבה", "רחובות וצירים", "צורת גג"]
     },
     {
         number: 5,
@@ -98,18 +98,18 @@ let questionScore = 0;
 let correctCount = 0;
 
 // pinch to zoom
-let scale = 1;
-let lastScale = 1;
-let startX = 0;
-let startY = 0;
-let currentX = 0;
-let currentY = 0;
-let isPanning = false;
-let lastTap = 0;
-let velocityX = 0;
-let velocityY = 0;
-let lastMoveTime = 0;
-let container;
+// let scale = 1;
+// let lastScale = 1;
+// let startX = 0;
+// let startY = 0;
+// let currentX = 0;
+// let currentY = 0;
+// let isPanning = false;
+// let lastTap = 0;
+// let velocityX = 0;
+// let velocityY = 0;
+// let lastMoveTime = 0;
+// let container;
 
 
 window.addEventListener("load", () => {
@@ -136,6 +136,13 @@ window.addEventListener("load", () => {
     }
     // INSTRUCTIONS
     else if (document.getElementById("instructions")) {
+        questions.forEach(q => {
+            if (q.top[0] === "src") {
+                const imgLoad = new Image();
+                imgLoad.src = q.top[1];
+            }
+        });
+
         closeBtn = document.getElementById("close-instructions");
         closeBtn.addEventListener("click", () => { window.location.href = "practice.html" });
     }
@@ -163,6 +170,8 @@ window.addEventListener("load", () => {
             document.getElementById("finish-number").textContent = "";
         }
     }
+
+    setupImageViewer();                       //remove for pinch to zoom
 });
 function saveUserInfo(event) {
     event.preventDefault();
@@ -209,24 +218,55 @@ function saveUserInfo(event) {
 }
 function showQuestion(q) {
     isAnswered = false;
-    document.getElementById("form-btn").src = "./assets/unAnsweredBtn.svg";
+    document.getElementById("form-btn").src = "assets/unAnsweredBtn.svg";
 
     // TOP
     const top = document.getElementById("top");
     container = document.getElementById("top");
     top.innerHTML = "";
     if (questions[q].top[0] === "src") {
+
+
+
+
+
+
         top.innerHTML = `
             <img src="${questions[q].top[1]}" class="question-image">
-            <img src="./assets/enlarge.svg" id="zoom-btn">
+            <img src="assets/enlarge.svg" id="zoom-btn">
         `;
-        const img = top.querySelector(".question-image");
+        let img = top.querySelector(".question-image");
+
+
+
+
+
+
+
+
         // img.addEventListener("click", openImageModal);
         // top.querySelector("#zoom-btn").addEventListener("click", openImageModal);
 
-        img.onload = () => {                            //remove for pinch to zoom
-            enablePinchZoom(top, img);                            //remove for pinch to zoom
-        };                            //remove for pinch to zoom
+        // img.onload = () => {                            //remove for pinch to zoom
+        //     enablePinchZoom(top, img);                            //remove for pinch to zoom
+        // };                            //remove for pinch to zoom
+
+        // document.getElementById("zoom-btn").addEventListener("click", enlargeImg);              //remove for pinch to zoom
+
+        img.onclick = () => {
+            openImage(img.src);
+        };
+        document.getElementById("zoom-btn").onclick = (e) => {
+            e.stopPropagation(); // prevents double-trigger with image click
+            openImage(img.src);
+        };
+
+
+
+
+
+
+
     }
     else if (questions[q].top[0] === "table") {
         showDragTable(q);
@@ -268,10 +308,10 @@ function showQuestion(q) {
     formBtn = document.getElementById("form-btn")
     formBtn.alt = "check"
     formBtn.name = "check"
-    formBtn.src = "./assets/unAnsweredBtn.svg"
+    formBtn.src = "assets/unAnsweredBtn.svg"
 
     // PROGRESS
-    document.getElementById("progress-bar").src = `./assets/progress=${questions[q].number}.svg`;
+    document.getElementById("progress-bar").src = `assets/progress=${questions[q].number}.svg`;
 };
 
 // QUESTION TYPES
@@ -361,14 +401,14 @@ function showDragTable(q) {
     table.id = "drag-table";
     table.innerHTML = `
         <div class="table-side">
-            <img src="./assets/relief.svg" alt='תבליט' id="relief-title" class="zone-title"/>
+            <img src="assets/relief.svg" alt='תבליט' id="relief-title" class="zone-title"/>
             <div class="drop-zone" id="relief">
                 <div class="zone-content"></div>
             </div>
         </div>
         
         <div class="table-side">
-            <img src="./assets/cover.svg" alt='תכסית' id="cover-title" class="zone-title"/>
+            <img src="assets/cover.svg" alt='תכסית' id="cover-title" class="zone-title"/>
             <div class="drop-zone" id="cover">
                 <div class="zone-content"></div>
             </div>
@@ -447,7 +487,7 @@ function showCompass(q) {
     compass.id = "compass-container";
 
     compass.innerHTML = `
-        <img src="./assets/compass.svg" id="compass-img">
+        <img src="assets/compass.svg" id="compass-img">
 
         <div class="compass-drop north" data-direction="צפון"></div>
         <div class="compass-drop east" data-direction="מזרח"></div>
@@ -736,7 +776,7 @@ function handleContinue() {
 }
 function setToContinue() {
     formBtn = document.getElementById("form-btn");
-    formBtn.src = "./assets/nextBtn.svg";
+    formBtn.src = "assets/nextBtn.svg";
     formBtn.alt = "continue";
 }
 function handleAnswer(userAnswer) {
@@ -761,21 +801,25 @@ function handleAnswer(userAnswer) {
 function showScore() {
     quizData = JSON.parse(localStorage.getItem("quizData"));
 
+
+
+
     // //     -      if open question answer is considered correct      -
     // //{--
-    const maxScore = questions.length;
+    // const maxScore = questions.length;
     // //--}
 
-    // //     -      if open question answer is not considered in score     -
-    // //{--
-    // let countOpenQuestions = 0;
-    // questions.forEach(question => {
-    //     if (question.type === "open") {
-    //         countOpenQuestions++;
-    //     }
-    // });
-    // const maxScore = questions.length - (countOpenQuestions);
-    // //--}
+    //     -      if open question answer is not considered in score     -
+    //{--
+    let countOpenQuestions = 0;
+    questions.forEach(question => {
+        if (question.type === "open") {
+            countOpenQuestions++;
+        }
+    });
+    const maxScore = questions.length - (countOpenQuestions);
+    //--}
+
 
 
 
@@ -837,118 +881,166 @@ function setAnswered(answered) {
     isAnswered = answered;
     document.getElementById("form-btn").src =
         answered
-            ? "./assets/checkBtn.svg"
-            : "./assets/unAnsweredBtn.svg";
+            ? "assets/checkBtn.svg"
+            : "assets/unAnsweredBtn.svg";
 }
 
-//remove for pinch to zoom
-function enablePinchZoom(container, img) {//remove for pinch to zoom
-    let initialDistance = 0;
 
-    function getDistance(touches) {
-        const dx = touches[0].clientX - touches[1].clientX;
-        const dy = touches[0].clientY - touches[1].clientY;
-        return Math.sqrt(dx * dx + dy * dy);
+
+
+
+
+
+function setupImageViewer() {
+    const modal = document.getElementById("image-modal");
+    const modalImg = document.getElementById("modal-image");
+    const closeBtn = document.getElementById("close-modal");
+
+    // open
+    window.openImage = function (src) {
+        modalImg.src = src;
+        modal.classList.remove("hidden");
+    };
+
+    // close
+    function closeModal() {
+        modal.classList.add("hidden");
+        modalImg.src = "";
     }
 
-    container.addEventListener("touchstart", (e) => {
-        if (e.touches.length === 2) {
-            initialDistance = getDistance(e.touches);
-            lastScale = scale;
-        }
+    closeBtn.addEventListener("click", closeModal);
 
-        if (e.touches.length === 1 && scale > 1) {
-            isPanning = true;
-            startX = e.touches[0].clientX - currentX;
-            startY = e.touches[0].clientY - currentY;
-        }
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
     });
+}
+// function enablePinchZoom(container, img) {//remove for pinch to zoom
+//     let initialDistance = 0;
 
-    container.addEventListener("touchmove", (e) => {
-        if (e.touches.length === 2) {
-            e.preventDefault();
+//     function getDistance(touches) {
+//         const dx = touches[0].clientX - touches[1].clientX;
+//         const dy = touches[0].clientY - touches[1].clientY;
+//         return Math.sqrt(dx * dx + dy * dy);
+//     }
 
-            const newDistance = getDistance(e.touches);
-            scale = lastScale * (newDistance / initialDistance);
-            scale = Math.max(1, Math.min(scale, 3));
+//     container.addEventListener("touchstart", (e) => {
+//         if (e.touches.length === 2) {
+//             initialDistance = getDistance(e.touches);
+//             lastScale = scale;
+//         }
 
-            applyTransform(document.querySelector("#top .question-image"));
-        }
+//         if (e.touches.length === 1 && scale > 1) {
+//             isPanning = true;
+//             startX = e.touches[0].clientX - currentX;
+//             startY = e.touches[0].clientY - currentY;
+//         }
+//     });
 
-        if (e.touches.length === 1 && isPanning && scale > 1) {
-            const now = Date.now();
-            const dx = e.touches[0].clientX - startX;
-            const dy = e.touches[0].clientY - startY;
+//     container.addEventListener("touchmove", (e) => {
+//         if (e.touches.length === 2) {
+//             e.preventDefault();
 
-            // velocity calculation
-            const dt = now - lastMoveTime || 16;
-            velocityX = (dx - currentX) / dt;
-            velocityY = (dy - currentY) / dt;
-            lastMoveTime = now;
-            currentX = dx;
-            currentY = dy;
+//             const newDistance = getDistance(e.touches);
+//             scale = lastScale * (newDistance / initialDistance);
+//             scale = Math.max(1, Math.min(scale, 3));
 
-            applyTransform(document.querySelector("#top .question-image"));
-        }
-    }, { passive: false });
+//             applyTransform(document.querySelector("#top .question-image"));
+//         }
 
-    container.addEventListener("touchend", (e) => {
-        const now = Date.now();
+//         if (e.touches.length === 1 && isPanning && scale > 1) {
+//             const now = Date.now();
+//             const dx = e.touches[0].clientX - startX;
+//             const dy = e.touches[0].clientY - startY;
 
-        if (now - lastTap < 300) {
-            // DOUBLE TAP
-            if (scale > 1) {
-                scale = 1;
-                currentX = 0;
-                currentY = 0;
-            } else {
-                scale = 2;
-            }
-            applyTransform(document.querySelector("#top .question-image"));
-        }
-        lastTap = now;
+//             // velocity calculation
+//             const dt = now - lastMoveTime || 16;
+//             velocityX = (dx - currentX) / dt;
+//             velocityY = (dy - currentY) / dt;
+//             lastMoveTime = now;
+//             currentX = dx;
+//             currentY = dy;
 
-        if (e.touches.length === 0) {
-            isPanning = false;
-            // inertia only when zoomed in
-            if (scale > 1) {
-                requestAnimationFrame(applyInertia);
-            }
-        }
-    });
-}//remove for pinch to zoom
-function applyTransform(img) {//remove for pinch to zoom
-    container = document.getElementById("top");
+//             applyTransform(document.querySelector("#top .question-image"));
+//         }
+//     }, { passive: false });
 
-    const rect = container.getBoundingClientRect();
-    const maxX = (rect.width * (scale - 1)) / 2;
-    const maxY = (rect.height * (scale - 1)) / 2;
+//     container.addEventListener("touchend", (e) => {
+//         const now = Date.now();
 
-    // clamp position
-    currentX = Math.max(-maxX, Math.min(maxX, currentX));
-    currentY = Math.max(-maxY, Math.min(maxY, currentY));
+//         if (now - lastTap < 300) {
+//             // DOUBLE TAP
+//             if (scale > 1) {
+//                 scale = 1;
+//                 currentX = 0;
+//                 currentY = 0;
+//             } else {
+//                 scale = 2;
+//             }
+//             applyTransform(document.querySelector("#top .question-image"));
+//         }
+//         lastTap = now;
 
-    // snap back when zoomed out
-    if (scale === 1) {
-        currentX = 0;
-        currentY = 0;
-    }
-    img.style.transform = `
-        translate(${currentX}px, ${currentY}px)
-        scale(${scale})
-    `;
-}//remove for pinch to zoom
-function applyInertia() {//remove for pinch to zoom
-    if (Math.abs(velocityX) < 0.01 && Math.abs(velocityY) < 0.01) return;
+//         if (e.touches.length === 0) {
+//             isPanning = false;
+//             // inertia only when zoomed in
+//             if (scale > 1) {
+//                 requestAnimationFrame(applyInertia);
+//             }
+//         }
+//     });
+// }                           //remove for pinch to zoom
+// function applyTransform(img) {//remove for pinch to zoom
+//     container = document.getElementById("top");
 
-    currentX += velocityX * 16;
-    currentY += velocityY * 16;
+//     const rect = container.getBoundingClientRect();
+//     const maxX = (rect.width * (scale - 1)) / 2;
+//     const maxY = (rect.height * (scale - 1)) / 2;
 
-    velocityX *= 0.92;
-    velocityY *= 0.92;
+//     // clamp position
+//     currentX = Math.max(-maxX, Math.min(maxX, currentX));
+//     currentY = Math.max(-maxY, Math.min(maxY, currentY));
 
-    applyTransform(document.querySelector("#top .question-image"));
+//     // snap back when zoomed out
+//     if (scale === 1) {
+//         currentX = 0;
+//         currentY = 0;
+//     }
+//     img.style.transform = `
+//         translate(${currentX}px, ${currentY}px)
+//         scale(${scale})
+//     `;
+// }                           //remove for pinch to zoom
+// function applyInertia() {   //remove for pinch to zoom
+//     if (Math.abs(velocityX) < 0.01 && Math.abs(velocityY) < 0.01) return;
 
-    requestAnimationFrame(applyInertia);
-}//remove for pinch to zoom
-//remove for pinch to zoom
+//     currentX += velocityX * 16;
+//     currentY += velocityY * 16;
+
+//     velocityX *= 0.92;
+//     velocityY *= 0.92;
+
+//     applyTransform(document.querySelector("#top .question-image"));
+
+//     requestAnimationFrame(applyInertia);
+// }                           //remove for pinch to zoom
+// function openImageModal() { //remove for pinch to zoom
+//     const modal = document.getElementById("image-modal");
+//     const modalImage = document.getElementById("modal-image");
+
+//     // modalImage.src = document.getElementById("top").src;
+//     modalImage.src = document.querySelector("#top .question-image").src;
+
+//     modal.classList.remove("hidden");
+// }                           //remove for pinch to zoom
+// function closeImageModal() {//remove for pinch to zoom
+//     document
+//         .getElementById("image-modal")
+//         .classList.add("hidden");
+// }                           //remove for pinch to zoom
+
+// function enlargeImg() {
+//     let thisImg = document.getElementById("top").querySelector(".question-image");
+//     thisImg.classList.add("enlargeThisImg");
+// }
+
+
