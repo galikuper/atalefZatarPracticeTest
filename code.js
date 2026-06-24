@@ -1,7 +1,7 @@
 let questions = [
     // {
     //     number: 0,
-    //     top: ["src", "assets/q0.svg"],
+    //     top: ["src", "assets/q0.png"],
     //     head: "מהו עקרון הזט״ר הבולט ביותר בתמונה?",
     //     type: "open",
     //     option: [],
@@ -9,7 +9,7 @@ let questions = [
     // },
     // {
     //     number: 1,
-    //     top: ["src", "assets/q1.svg"],
+    //     top: ["src", "assets/q1.png"],
     //     head: "מדוע נוצר ההבדל בין 2 התוצאות? סמן 2 תשובות נכונות",
     //     type: "multiple-choice",
     //     option: ["חבלה חמה/קרה", "⁠בניית מנהרות תת קרקעיות חדשות", "⁠הפעלת אש כבדה של כוחות שונים טרם כניסה קרקעית של כוחותינו", "התרסקות מטוס בסביבה", "הצפת מנהרות במי ים"],
@@ -17,7 +17,7 @@ let questions = [
     // },
     // {
     //     number: 2,
-    //     top: ["src", "assets/q2.svg"],
+    //     top: ["src", "assets/q2.png"],
     //     head: "איזה עקרון זט״ר בולט בתמונה ותוכל להיעזר בו כדי לאפיין מבנה מיוחד בתמונה?",
     //     type: "open",
     //     option: [],
@@ -25,20 +25,20 @@ let questions = [
     // },
     // {
     //     number: 3,
-    //     top: ["src", "assets/q3.svg"],
+    //     top: ["src", "assets/q3.png"],
     //     head: "מהו עקרון הזט״ר הבולט ביותר בתמונה?",
     //     type: "american",
     //     option: ["מיקום עצמי", "צורת גג", "⁠כיוון מבנים", "שימוש בצירים"],
     //     answer: "שימוש בצירים"
     // },
-    // {
-    //     number: 4,
-    //     top: ["src", "assets/q4.svg"],
-    //     head: "בחר 3 עקרונות זט״ר המופיעים בתמונה:",
-    //     type: "multiple-choice",
-    //     option: ["כיווני שמיים", "פרספקטיבה", "כיוון מבנים", "רחובות וצירים", "צורת גג", "מיקום עצמי", "הבדלים בין תצ״א למציאות"],
-    //     answer: ["כיווני שמיים", "פרספקטיבה", "רחובות וצירים", "צורת גג"]
-    // },
+    {
+        number: 4,
+        top: ["src", "assets/q4.png"],
+        head: "בחר 3 עקרונות זט״ר המופיעים בתמונה:",
+        type: "multiple-choice",
+        option: ["כיווני שמיים", "פרספקטיבה", "כיוון מבנים", "רחובות וצירים", "צורת גג", "מיקום עצמי", "הבדלים בין תצ״א למציאות"],
+        answer: ["כיווני שמיים", "פרספקטיבה", "רחובות וצירים", "צורת גג"]
+    },
     {
         number: 5,
         top: ["table", ""],
@@ -96,21 +96,6 @@ let formState = false;
 let userAnswer;
 let questionScore = 0;
 let correctCount = 0;
-
-// pinch to zoom
-// let scale = 1;
-// let lastScale = 1;
-// let startX = 0;
-// let startY = 0;
-// let currentX = 0;
-// let currentY = 0;
-// let isPanning = false;
-// let lastTap = 0;
-// let velocityX = 0;
-// let velocityY = 0;
-// let lastMoveTime = 0;
-// let container;
-
 
 window.addEventListener("load", () => {
     // INDEX
@@ -236,15 +221,6 @@ function showQuestion(q) {
             <img src="assets/enlarge.svg" id="zoom-btn">
         `;
         let img = top.querySelector(".question-image");
-
-        // img.addEventListener("click", openImageModal);
-        // top.querySelector("#zoom-btn").addEventListener("click", openImageModal);
-
-        // img.onload = () => {                            //remove for pinch to zoom
-        //     enablePinchZoom(top, img);                            //remove for pinch to zoom
-        // };                            //remove for pinch to zoom
-
-        // document.getElementById("zoom-btn").addEventListener("click", enlargeImg);              //remove for pinch to zoom
 
         img.onclick = () => {
             openImage(img.src);
@@ -779,36 +755,12 @@ function showScore() {
 
 // helper
 function animateMove(item, destination) {
-    // const start = item.getBoundingClientRect();
-    // destination.appendChild(item);
-    // const end = item.getBoundingClientRect();
-    // const deltaX = start.left - end.left;
-    // const deltaY = start.top - end.top;
-    // item.style.transition = "none";
-    // item.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(1.1)`;
-
-    // requestAnimationFrame(() => {
-    //     item.style.transition = "transform 0.65s cubic-bezier(.34,1.56,.64,1)";
-    //     item.style.transform = "translate(0,0) scale(1)";
-    // });
-
-    // item.addEventListener(
-    //     "transitionend",
-    //     () => {
-    //         item.style.transition = "";
-    //         item.style.transform = "";
-    //     },
-    //     { once: true }
-    // );
     const first = item.getBoundingClientRect();
-
     destination.appendChild(item);
 
     const last = item.getBoundingClientRect();
-
     const dx = first.left - last.left;
     const dy = first.top - last.top;
-
     item.animate(
         [
             {
@@ -964,131 +916,3 @@ function setupImageViewer() {
         if (e.target === modal) closeModal();
     });
 }
-// function enablePinchZoom(container, img) {//remove for pinch to zoom
-//     let initialDistance = 0;
-
-//     function getDistance(touches) {
-//         const dx = touches[0].clientX - touches[1].clientX;
-//         const dy = touches[0].clientY - touches[1].clientY;
-//         return Math.sqrt(dx * dx + dy * dy);
-//     }
-
-//     container.addEventListener("touchstart", (e) => {
-//         if (e.touches.length === 2) {
-//             initialDistance = getDistance(e.touches);
-//             lastScale = scale;
-//         }
-
-//         if (e.touches.length === 1 && scale > 1) {
-//             isPanning = true;
-//             startX = e.touches[0].clientX - currentX;
-//             startY = e.touches[0].clientY - currentY;
-//         }
-//     });
-
-//     container.addEventListener("touchmove", (e) => {
-//         if (e.touches.length === 2) {
-//             e.preventDefault();
-
-//             const newDistance = getDistance(e.touches);
-//             scale = lastScale * (newDistance / initialDistance);
-//             scale = Math.max(1, Math.min(scale, 3));
-
-//             applyTransform(document.querySelector("#top .question-image"));
-//         }
-
-//         if (e.touches.length === 1 && isPanning && scale > 1) {
-//             const now = Date.now();
-//             const dx = e.touches[0].clientX - startX;
-//             const dy = e.touches[0].clientY - startY;
-
-//             // velocity calculation
-//             const dt = now - lastMoveTime || 16;
-//             velocityX = (dx - currentX) / dt;
-//             velocityY = (dy - currentY) / dt;
-//             lastMoveTime = now;
-//             currentX = dx;
-//             currentY = dy;
-
-//             applyTransform(document.querySelector("#top .question-image"));
-//         }
-//     }, { passive: false });
-
-//     container.addEventListener("touchend", (e) => {
-//         const now = Date.now();
-
-//         if (now - lastTap < 300) {
-//             // DOUBLE TAP
-//             if (scale > 1) {
-//                 scale = 1;
-//                 currentX = 0;
-//                 currentY = 0;
-//             } else {
-//                 scale = 2;
-//             }
-//             applyTransform(document.querySelector("#top .question-image"));
-//         }
-//         lastTap = now;
-
-//         if (e.touches.length === 0) {
-//             isPanning = false;
-//             // inertia only when zoomed in
-//             if (scale > 1) {
-//                 requestAnimationFrame(applyInertia);
-//             }
-//         }
-//     });
-// }                           //remove for pinch to zoom
-// function applyTransform(img) {//remove for pinch to zoom
-//     container = document.getElementById("top");
-
-//     const rect = container.getBoundingClientRect();
-//     const maxX = (rect.width * (scale - 1)) / 2;
-//     const maxY = (rect.height * (scale - 1)) / 2;
-
-//     // clamp position
-//     currentX = Math.max(-maxX, Math.min(maxX, currentX));
-//     currentY = Math.max(-maxY, Math.min(maxY, currentY));
-
-//     // snap back when zoomed out
-//     if (scale === 1) {
-//         currentX = 0;
-//         currentY = 0;
-//     }
-//     img.style.transform = `
-//         translate(${currentX}px, ${currentY}px)
-//         scale(${scale})
-//     `;
-// }                           //remove for pinch to zoom
-// function applyInertia() {   //remove for pinch to zoom
-//     if (Math.abs(velocityX) < 0.01 && Math.abs(velocityY) < 0.01) return;
-
-//     currentX += velocityX * 16;
-//     currentY += velocityY * 16;
-
-//     velocityX *= 0.92;
-//     velocityY *= 0.92;
-
-//     applyTransform(document.querySelector("#top .question-image"));
-
-//     requestAnimationFrame(applyInertia);
-// }                           //remove for pinch to zoom
-// function openImageModal() { //remove for pinch to zoom
-//     const modal = document.getElementById("image-modal");
-//     const modalImage = document.getElementById("modal-image");
-
-//     // modalImage.src = document.getElementById("top").src;
-//     modalImage.src = document.querySelector("#top .question-image").src;
-
-//     modal.classList.remove("hidden");
-// }                           //remove for pinch to zoom
-// function closeImageModal() {//remove for pinch to zoom
-//     document
-//         .getElementById("image-modal")
-//         .classList.add("hidden");
-// }                           //remove for pinch to zoom
-
-// function enlargeImg() {
-//     let thisImg = document.getElementById("top").querySelector(".question-image");
-//     thisImg.classList.add("enlargeThisImg");
-// }
