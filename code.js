@@ -98,8 +98,8 @@ window.addEventListener("load", () => {
     // INDEX
     if (document.getElementById("open-title")) {
         startBtn = document.getElementById("start-practice");
-        // startBtn.addEventListener("click", () => { window.location.href = "userInfo.html" });
-        startBtn.addEventListener("click", () => { startTransition(null, "userInfo.html"); });
+        startBtn.addEventListener("click", () => { window.location.href = "userInfo.html" });
+        // startBtn.addEventListener("click", () => { startTransition(null, "userInfo.html"); });
 
     }
     // USER INFO
@@ -128,8 +128,8 @@ window.addEventListener("load", () => {
         });
 
         closeBtn = document.getElementById("close-instructions");
-        // closeBtn.addEventListener("click", () => { window.location.href = "practice.html" });
-        closeBtn.addEventListener("click", () => { startTransition(null, "practice.html"); });
+        closeBtn.addEventListener("click", () => { window.location.href = "practice.html" });
+        // closeBtn.addEventListener("click", () => { startTransition(null, "practice.html"); });
     }
     // PRACTICE
     else if (document.getElementById("question")) {
@@ -664,9 +664,9 @@ function handleContinue() {
     localStorage.setItem("quizData", JSON.stringify(quizData));
 
     if (countQuest < questions.length) {
-        startTransition(() => {
+        // startTransition(() => {
             showQuestion(countQuest);
-        });
+        // });
     }
     else {
         window.location.href = "finish.html";
@@ -895,65 +895,65 @@ function setupImageViewer() {
 
 
 
-function startTransition(callback, nextPage) {
-    alert("transition started");      //test
+// function startTransition(callback, nextPage) {
+//     alert("transition started");      //test
 
-    const overlay = document.getElementById("transition-overlay");
+//     const overlay = document.getElementById("transition-overlay");
     
-    if (!overlay) {      //test
-        alert("No transition overlay found!");      //test
-        return;      //test
-    }      //test
+//     if (!overlay) {      //test
+//         alert("No transition overlay found!");      //test
+//         return;      //test
+//     }      //test
 
-    overlay.innerHTML = "";
+//     overlay.innerHTML = "";
 
-    const isQuestion = !!document.getElementById("question");
+//     const isQuestion = !!document.getElementById("question");
 
-    for (let i = 0; i < 15; i++) {
-        const bat = document.createElement("img");
+//     for (let i = 0; i < 15; i++) {
+//         const bat = document.createElement("img");
 
-        bat.src = "./assets/bat.svg";
-        bat.classList.add("transition-bat");
+//         bat.src = "./assets/bat.svg";
+//         bat.classList.add("transition-bat");
 
-        let size, duration, delay, yOffset;
+//         let size, duration, delay, yOffset;
 
-        if (isQuestion) {
-            size = 60 + Math.random() * 140;
-            duration = 400 + Math.random() * 300;
-            delay = Math.random() * 100;
-            yOffset = Math.random() * 80 - 40;
-        } else {
-            size = 60 + Math.random() * 140;
-            duration = 350 + Math.random() * 450;
-            delay = Math.random() * 200;
-            yOffset = Math.random() * 80 - 40;
-        }
+//         if (isQuestion) {
+//             size = 60 + Math.random() * 140;
+//             duration = 400 + Math.random() * 300;
+//             delay = Math.random() * 100;
+//             yOffset = Math.random() * 80 - 40;
+//         } else {
+//             size = 60 + Math.random() * 140;
+//             duration = 350 + Math.random() * 450;
+//             delay = Math.random() * 200;
+//             yOffset = Math.random() * 80 - 40;
+//         }
 
-        bat.style.width = `${size}px`;
-        bat.style.animationDuration = `${duration}ms`;
-        bat.style.animationDelay = `${delay}ms`;
-        bat.style.setProperty("--yOffset", `${yOffset}vh`);
+//         bat.style.width = `${size}px`;
+//         bat.style.animationDuration = `${duration}ms`;
+//         bat.style.animationDelay = `${delay}ms`;
+//         bat.style.setProperty("--yOffset", `${yOffset}vh`);
 
-        // optional positioning difference
-        bat.style.top = isQuestion
-            ? `${Math.random() * 90}%`
-            : `${Math.random() * 100}%`;
+//         // optional positioning difference
+//         bat.style.top = isQuestion
+//             ? `${Math.random() * 90}%`
+//             : `${Math.random() * 100}%`;
 
-        overlay.appendChild(bat);
-    }
+//         overlay.appendChild(bat);
+//     }
 
-    if (isQuestion) {
-        setTimeout(() => {
-            callback();
-        }, 250);
+//     if (isQuestion) {
+//         setTimeout(() => {
+//             callback();
+//         }, 250);
 
-        setTimeout(() => {
-            overlay.innerHTML = "";
-        }, 900);
-    }
-    else {
-        setTimeout(() => {
-            window.location.href = nextPage;
-        }, 350);
-    }
-}
+//         setTimeout(() => {
+//             overlay.innerHTML = "";
+//         }, 900);
+//     }
+//     else {
+//         setTimeout(() => {
+//             window.location.href = nextPage;
+//         }, 350);
+//     }
+// }
