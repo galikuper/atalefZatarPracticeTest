@@ -320,6 +320,8 @@ body {
     pointer-events: none;
     z-index: 9999;
     overflow: hidden;
+    display: none;
+
 }
 
 .transition-bat {
