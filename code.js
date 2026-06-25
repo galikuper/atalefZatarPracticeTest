@@ -98,8 +98,8 @@ window.addEventListener("load", () => {
     // INDEX
     if (document.getElementById("open-title")) {
         startBtn = document.getElementById("start-practice");
-        startBtn.addEventListener("click", () => { window.location.href = "userInfo.html" });
-        // startBtn.addEventListener("click", () => { startTransition(null, "userInfo.html"); });
+        // startBtn.addEventListener("click", () => { window.location.href = "userInfo.html" });
+        startBtn.addEventListener("click", () => { startTransition(null, "userInfo.html"); });
 
     }
     // USER INFO
@@ -128,8 +128,8 @@ window.addEventListener("load", () => {
         });
 
         closeBtn = document.getElementById("close-instructions");
-        closeBtn.addEventListener("click", () => { window.location.href = "practice.html" });
-        // closeBtn.addEventListener("click", () => { startTransition(null, "practice.html"); });
+        // closeBtn.addEventListener("click", () => { window.location.href = "practice.html" });
+        closeBtn.addEventListener("click", () => { startTransition(null, "practice.html"); });
     }
     // PRACTICE
     else if (document.getElementById("question")) {
@@ -896,7 +896,15 @@ function setupImageViewer() {
 
 
 function startTransition(callback, nextPage) {
+    console.log("transition started");      //test
+
     const overlay = document.getElementById("transition-overlay");
+    
+    if (!overlay) {      //test
+        console.error("No transition overlay found!");      //test
+        return;      //test
+    }      //test
+    
     overlay.innerHTML = "";
 
     const isQuestion = !!document.getElementById("question");
