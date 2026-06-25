@@ -896,15 +896,15 @@ function setupImageViewer() {
 
 
 function startTransition(callback, nextPage) {
-    console.log("transition started");      //test
+    alert("transition started");      //test
 
     const overlay = document.getElementById("transition-overlay");
     
     if (!overlay) {      //test
-        console.error("No transition overlay found!");      //test
+        alert("No transition overlay found!");      //test
         return;      //test
     }      //test
-    
+
     overlay.innerHTML = "";
 
     const isQuestion = !!document.getElementById("question");
