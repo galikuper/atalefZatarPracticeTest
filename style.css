@@ -326,41 +326,29 @@ body {
     position: absolute;
     right: -150px;
 
+
     animation-name: flyBat;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
+
+    /* transform: scaleX(-1); */
 }
 
 @keyframes flyBat {
     from {
         transform:
-            translateX(0) translateY(0)
-            /* rotate(-10deg); */
+            translateX(0) 
+            translateY(0)
+            rotate(-25deg);
     }
 
     to {
         transform:
-            translateX(-160vw) translateY(-60vh)
-            /* rotate(25deg); */
-            /* opacity: 0.5; */
+            translateX(-160vw) 
+            translateY(-60vh)
+            rotate(-10deg);
     }
 }
-
-@keyframes flyBat {
-    from {
-        transform: translate(0, 0)
-            /* rotate(-10deg); */
-    }
-
-    to {
-        transform:
-            translateX(-160vw) translateY(calc(-30vh + var(--yOffset)))
-            /* rotate(25deg); */
-            /* opacity: 0; */
-    }
-}
-
-
 
 
 
