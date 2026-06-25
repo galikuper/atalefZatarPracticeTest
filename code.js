@@ -98,8 +98,9 @@ window.addEventListener("load", () => {
     // INDEX
     if (document.getElementById("open-title")) {
         startBtn = document.getElementById("start-practice");
-        // startBtn.addEventListener("click", () => { window.location.href = "userInfo.html" });
-        startBtn.addEventListener("click", () => { startTransition(null, "userInfo.html"); });
+        startBtn.addEventListener("click", () => { window.location.href = "userInfo.html" });
+        // startBtn.addEventListener("click", () => { startTransition(null, "userInfo.html"); });
+
     }
     // USER INFO
     else if (document.getElementById("user-info")) {
@@ -127,8 +128,8 @@ window.addEventListener("load", () => {
         });
 
         closeBtn = document.getElementById("close-instructions");
-        // closeBtn.addEventListener("click", () => { window.location.href = "practice.html" });
-        closeBtn.addEventListener("click", () => { startTransition(null, "practice.html"); });
+        closeBtn.addEventListener("click", () => { window.location.href = "practice.html" });
+        // closeBtn.addEventListener("click", () => { startTransition(null, "practice.html"); });
     }
     // PRACTICE
     else if (document.getElementById("question")) {
