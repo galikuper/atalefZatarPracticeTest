@@ -853,8 +853,8 @@ function updateAnsweredState() {
     // Compass question
     if (document.getElementById("compass-container")) {
         const placed = document.querySelectorAll(".compass-drop .dir-item").length;
-        // setAnswered(placed === 4);
-        setAnswered(placed >= 1);
+        setAnswered(placed === 4);
+        // setAnswered(placed >= 1);
         return;
     }
 
@@ -862,8 +862,8 @@ function updateAnsweredState() {
     if (document.getElementById("drag-table")) {
         const placed = document.querySelectorAll("#relief .drag-item, #cover .drag-item").length;
         const total = document.querySelectorAll(".drag-item").length;
-        // setAnswered(placed === total);
-        setAnswered(placed >= 1);
+        setAnswered(placed === total);
+        // setAnswered(placed >= 1);
     }
 }
 function setupImageViewer() {
